@@ -187,18 +187,32 @@
   padding-left: calc(var(--sidebar-width-collapsed) + 20px);
 }
 
-/* Popup submenu (flyout) khi thu gọn — top do JS neo theo item */
+/* Popup submenu (flyout) khi thu gọn — top do JS neo theo item.
+   Đóng/mở bằng fade + slide đối xứng (không co height kiểu accordion,
+   tránh cảm giác item bị "nuốt" lần lượt khi đóng). */
 #left-menu.small-left-menu li.has-sub > ul {
   position: fixed;
   left: calc(var(--sidebar-width-collapsed) + 9px);
   width: 220px;
+  height: auto;            /* ghi đè height:0 của accordion */
   margin: 0;
-  padding-left: 15px;
+  padding: 8px 0 8px 15px;
+  overflow: visible;
   z-index: var(--z-drawer);
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
 }
-#left-menu.small-left-menu li.has-sub > ul.open { padding-block: 8px; }
+#left-menu.small-left-menu li.has-sub > ul.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(0);
+}
 
 /* Tooltip nhãn khi hover lúc thu gọn */
 #show-lable {

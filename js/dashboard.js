@@ -43,28 +43,42 @@
     return leftMenu && leftMenu.classList.contains("small-left-menu") && !isMobile();
   }
 
+  // Đóng 1 submenu — flyout (thu gọn) fade qua CSS, accordion co height
+  function closeSub(li) {
+    var sub = li.querySelector("ul");
+    li.classList.remove("rotate");
+    if (!sub) return;
+    sub.classList.remove("open");
+    if (isCollapsed()) {
+      sub.style.height = "";   // flyout: để CSS lo opacity/transform
+    } else {
+      sub.style.height = "0px";
+      sub.style.top = "";
+    }
+  }
+
   function closeAllSubs() {
     if (!leftMenu) return;
-    leftMenu.querySelectorAll("li.has-sub").forEach(function (li) {
-      li.classList.remove("rotate");
-      var s = li.querySelector("ul");
-      if (s) { s.classList.remove("open"); s.style.height = "0px"; s.style.top = ""; }
-    });
+    leftMenu.querySelectorAll("li.has-sub").forEach(closeSub);
   }
 
   function openSub(li) {
     var sub = li.querySelector("ul");
     if (!sub) return;
-    sub.classList.add("open");
     li.classList.add("rotate");
     if (isCollapsed()) {
-      // Flyout: neo top theo item, không cho tràn đáy màn hình
+      // Flyout: đặt vị trí tức thì (không transition), hiện bằng fade + slide
+      sub.style.height = "";
       var rect = li.getBoundingClientRect();
-      var wanted = sub.scrollHeight;
-      var top = Math.min(rect.top, window.innerHeight - wanted - 8);
+      var top = Math.min(rect.top, window.innerHeight - sub.scrollHeight - 8);
       sub.style.top = Math.max(top, 8) + "px";
+      sub.classList.add("open");
+    } else {
+      // Accordion: co giãn height
+      sub.style.top = "";
+      sub.classList.add("open");
+      sub.style.height = sub.scrollHeight + "px";
     }
-    sub.style.height = sub.scrollHeight + "px";
   }
 
   // Click = accordion (chỉ khi mở rộng; thu gọn dùng hover)
@@ -88,9 +102,7 @@
       openSub(li);
     });
     li.addEventListener("mouseleave", function () {
-      if (!isCollapsed()) return;
-      var sub = li.querySelector("ul");
-      if (sub) { sub.classList.remove("open"); li.classList.remove("rotate"); sub.style.height = "0px"; sub.style.top = ""; }
+      if (isCollapsed()) closeSub(li);
     });
   });
 
