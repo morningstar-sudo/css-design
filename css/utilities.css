@@ -1,5 +1,5 @@
 /* ==========================================================================
-   utilities.css — Class tiện ích: display, flex, spacing, text, responsive
+   utilities.css — Utility classes: display, flex, spacing, text, responsive
    ========================================================================== */
 
 /* ---- Display --------------------------------------------------------- */
@@ -10,7 +10,7 @@
 .d-inline-flex { display: inline-flex !important; }
 .d-grid    { display: grid !important; }
 
-/* ---- Float (tương thích markup gốc) ---------------------------------- */
+/* ---- Float (compatible with the original markup) ---------------------------------- */
 .float-left  { float: left !important; }
 .float-right { float: right !important; }
 .clearfix::after { content: ""; display: block; clear: both; }
@@ -80,7 +80,7 @@
 .border-0    { border: 0 !important; }
 
 /* ---- Spacing (margin / padding), thang 0..8 -------------------------- */
-/* m/p + t/r/b/l/x/y + số. Ví dụ: .mt-3 .px-4 .mb-0                       */
+/* m/p + t/r/b/l/x/y + number. e.g. .mt-3 .px-4 .mb-0                       */
 .m-0 { margin: var(--space-0) !important; }
 .m-1 { margin: var(--space-1) !important; }
 .m-2 { margin: var(--space-2) !important; }
@@ -133,38 +133,38 @@
 .pl-1 { padding-left: var(--space-1) !important; }
 
 /* ==========================================================================
-   RESPONSIVE UTILITIES — ẩn/hiện & display theo breakpoint
+   RESPONSIVE UTILITIES — hide/show & display per breakpoint
    ========================================================================== */
 
-/* ≥576px */
+/* >=576px */
 @media (min-width: 576px) {
   .d-sm-none   { display: none !important; }
   .d-sm-block  { display: block !important; }
   .d-sm-flex   { display: flex !important; }
   .d-sm-inline { display: inline !important; }
 }
-/* ≥768px */
+/* >=768px */
 @media (min-width: 768px) {
   .d-md-none   { display: none !important; }
   .d-md-block  { display: block !important; }
   .d-md-flex   { display: flex !important; }
   .d-md-inline { display: inline !important; }
 }
-/* ≥992px */
+/* >=992px */
 @media (min-width: 992px) {
   .d-lg-none   { display: none !important; }
   .d-lg-block  { display: block !important; }
   .d-lg-flex   { display: flex !important; }
   .d-lg-inline { display: inline !important; }
 }
-/* ≥1200px */
+/* >=1200px */
 @media (min-width: 1200px) {
   .d-xl-none   { display: none !important; }
   .d-xl-block  { display: block !important; }
   .d-xl-flex   { display: flex !important; }
 }
 
-/* Chỉ hiện dưới 1 ngưỡng (tiện cho mobile menu) */
+/* Show only below a threshold (handy for the mobile menu) */
 @media (max-width: 991.98px) {
   .hide-below-lg { display: none !important; }
 }

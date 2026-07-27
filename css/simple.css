@@ -1,8 +1,8 @@
 /* ==========================================================================
-   simple.css — File TỔNG. Chỉ cần link file này là có toàn bộ hệ thống.
+   simple.css — MASTER file. Link just this file to get the whole system.
    <link rel="stylesheet" href="css/simple.css">
 
-   Thứ tự import quan trọng: tokens → reset → base → layout → components.
+   Import order matters: tokens -> reset -> base -> layout -> components.
    ========================================================================== */
 
 /* Foundation */

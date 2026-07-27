@@ -112,7 +112,7 @@
 .chip .chip-close { cursor: pointer; opacity: 0.6; }
 .chip .chip-close:hover { opacity: 1; }
 
-/* ---- Divider có chữ -------------------------------------------------- */
+/* ---- Divider with text -------------------------------------------------- */
 .divider-text {
   display: flex;
   align-items: center;

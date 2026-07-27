@@ -1,5 +1,5 @@
 /* ==========================================================================
-   card.css — Thẻ nội dung
+   card.css — Content card
    ========================================================================== */
 
 .card {
@@ -11,7 +11,7 @@
   overflow: hidden;
 }
 
-/* Tiêu đề card (giữ cả .title như pen gốc và .card-header chuẩn) */
+/* Card title (keeps .title from the original pen and standard .card-header) */
 .card > .title,
 .card-header {
   padding: 15px 20px;
@@ -32,9 +32,9 @@
   background: var(--bg-muted);
 }
 
-/* Card có ảnh trên đầu */
+/* Card with a top image */
 .card-img-top { width: 100%; object-fit: cover; }
 
-/* Card nhấn nhẹ khi hover (tuỳ chọn) */
+/* Subtle lift on hover (optional) */
 .card-hover { transition: var(--transition); }
 .card-hover:hover { box-shadow: var(--shadow); transform: translateY(-2px); }

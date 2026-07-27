@@ -1,8 +1,8 @@
 /* ==========================================================================
-   dashboard.css — Bố cục admin: logo, sidebar, header, vùng nội dung
+   dashboard.css — admin layout: logo, sidebar, header, content area
    Responsive:
-     ≥992px : sidebar đầy đủ, thu gọn được (.small-left-menu)
-     <992px : sidebar thành DRAWER trượt + overlay (mở bằng nút menu)
+     >=992px : full sidebar, collapsible (.small-left-menu)
+     <992px  : sidebar becomes a sliding DRAWER + overlay (open via menu btn)
    ========================================================================== */
 
 /* ---- Logo ------------------------------------------------------------ */
@@ -84,7 +84,7 @@
 #left-menu ul li:hover > a span,
 #left-menu ul li:hover > a i { color: var(--text-sidebar-hover); }
 
-/* Item active */
+/* Active item */
 #left-menu ul li.active > a { border-bottom: 2px solid var(--color-primary); }
 #left-menu ul li.active > a span { color: var(--text-sidebar-active); }
 #left-menu ul li.active > a i,
@@ -108,7 +108,7 @@
 #left-menu li.has-sub > ul a { height: auto; color: var(--text-sidebar); }
 #left-menu li.has-sub > ul a:hover { color: var(--text-sidebar-hover); }
 
-/* Mũi tên xoay */
+/* Rotating caret */
 @media (min-width: 992px) {
   #left-menu li.has-sub::after {
     content: "";
@@ -158,7 +158,7 @@
 }
 #toggle-left-menu:hover { color: var(--color-primary); }
 
-/* ---- Vùng nội dung --------------------------------------------------- */
+/* ---- Content area ---------------------------------------------------- */
 #main-content { min-height: calc(100vh - var(--header-height)); }
 
 #page-container {
@@ -170,7 +170,7 @@
 }
 
 /* ==========================================================================
-   TRẠNG THÁI THU GỌN (≥992px) — .small-left-menu
+   COLLAPSED STATE (>=992px) — .small-left-menu
    ========================================================================== */
 #left-menu.small-left-menu,
 #logo.small-left-menu { width: var(--sidebar-width-collapsed); }
@@ -187,14 +187,14 @@
   padding-left: calc(var(--sidebar-width-collapsed) + 20px);
 }
 
-/* Popup submenu (flyout) khi thu gọn — top do JS neo theo item.
-   Đóng/mở bằng fade + slide đối xứng (không co height kiểu accordion,
-   tránh cảm giác item bị "nuốt" lần lượt khi đóng). */
+/* Submenu popup (flyout) while collapsed — top anchored to the item by JS.
+   Opens/closes with a symmetric fade + slide (not the accordion height
+   animation, which made items look "eaten" one by one on close). */
 #left-menu.small-left-menu li.has-sub > ul {
   position: fixed;
   left: calc(var(--sidebar-width-collapsed) + 9px);
   width: 220px;
-  height: auto;            /* ghi đè height:0 của accordion */
+  height: auto;            /* override the accordion's height:0 */
   margin: 0;
   padding: 8px 0 8px 15px;
   overflow: visible;
@@ -214,14 +214,14 @@
   transform: translateX(0);
 }
 
-/* Khi đang đổi trạng thái sidebar: tắt mọi transition của submenu để không
-   để lại "ảnh mờ" ghost trong lúc chuyển giữa thu gọn ↔ mở rộng */
+/* While switching sidebar state: disable all submenu transitions so no
+   ghost image lingers when moving between collapsed <-> expanded */
 #left-menu.no-anim li.has-sub > ul,
 #left-menu.no-anim.small-left-menu li.has-sub > ul {
   transition: none !important;
 }
 
-/* Tooltip nhãn khi hover lúc thu gọn */
+/* Tooltip label shown on hover while collapsed */
 #show-lable {
   position: fixed;
   z-index: var(--z-tooltip);
@@ -236,7 +236,7 @@
   pointer-events: none;
 }
 
-/* Overlay cho drawer mobile */
+/* Overlay for the mobile drawer */
 #sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -248,10 +248,10 @@
 }
 
 /* ==========================================================================
-   RESPONSIVE < 992px — sidebar thành drawer trượt
+   RESPONSIVE < 992px — sidebar becomes a sliding drawer
    ========================================================================== */
 @media (max-width: 991.98px) {
-  /* Hamburger ☰ nằm góc trái, luôn thấy & bấm được */
+  /* Hamburger sits at the far left, always visible & clickable */
   #header .header-left { padding-left: 0; }
   #toggle-left-menu {
     display: inline-flex;
@@ -263,7 +263,7 @@
     color: var(--text-body);
   }
 
-  /* Logo dịch sang phải hamburger, hoà vào header trắng (không che nút ☰) */
+  /* Logo shifts right of the hamburger, blends into the header (no overlap) */
   #logo {
     left: 52px;
     width: auto;
@@ -278,7 +278,7 @@
   #logo .big-logo { display: inline; }
   #logo .small-logo { display: none; }
 
-  /* Sidebar ẩn sang trái, mở bằng class .open — nổi trên overlay để bấm được */
+  /* Sidebar hidden to the left, opened via .open — above the overlay so it's clickable */
   #left-menu {
     z-index: var(--z-drawer);
     transform: translateX(-100%);
@@ -288,18 +288,18 @@
   #left-menu.open ~ #sidebar-overlay,
   #sidebar-overlay.open { opacity: 1; visibility: visible; }
 
-  /* Nội dung chiếm toàn bộ chiều ngang */
+  /* Content spans the full width */
   #page-container { padding-left: var(--space-5); }
 
-  /* Submenu accordion bình thường (không popup) */
+  /* Regular accordion submenu (no popup) */
   #left-menu li.has-sub > ul { position: static; width: auto; }
 
-  /* Bỏ thu gọn kiểu desktop trên mobile */
+  /* Drop the desktop collapse behavior on mobile */
   #left-menu.small-left-menu { width: var(--sidebar-width); }
   #left-menu.small-left-menu ul li a span { opacity: 1; visibility: visible; }
 }
 
-/* Màn rất nhỏ: giảm padding nội dung */
+/* Very small screens: reduce content padding */
 @media (max-width: 575.98px) {
   #page-container { padding-inline: var(--space-3); }
   .card > .content, .card-body { padding: var(--space-3); }

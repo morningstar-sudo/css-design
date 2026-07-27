@@ -1,8 +1,8 @@
 /* ==========================================================================
-   dashboard.js — JS vanilla (không cần jQuery) cho bố cục dashboard
-   - Toggle sidebar: ≥992px thu gọn (small-left-menu), <992px mở drawer
+   dashboard.js — vanilla JS (no jQuery) for the dashboard layout
+   - Toggle sidebar: >=992px collapse (small-left-menu), <992px slide drawer
    - Submenu accordion (.has-sub)
-   - Tooltip nhãn khi hover lúc thu gọn
+   - Tooltip label on hover while collapsed
    - Dropdown, tabs, modal, navbar toggler, dismiss alert
    ========================================================================== */
 (function () {
@@ -38,20 +38,20 @@
     overlay.classList.remove("open");
   });
 
-  /* ---- Submenu: accordion (mở rộng) / flyout hover (thu gọn) --------- */
-  // Đang ở chế độ sidebar thu gọn trên desktop?
+  /* ---- Submenu: accordion (expanded) / hover flyout (collapsed) ------ */
+  // Are we in the collapsed sidebar state on desktop?
   function isCollapsed() {
     return leftMenu && leftMenu.classList.contains("small-left-menu") && !isMobile();
   }
 
-  // Đóng 1 submenu — flyout (thu gọn) fade qua CSS, accordion co height
+  // Close one submenu — flyout (collapsed) fades via CSS, accordion animates height
   function closeSub(li) {
     var sub = li.querySelector("ul");
     li.classList.remove("rotate");
     if (!sub) return;
     sub.classList.remove("open");
     if (isCollapsed()) {
-      sub.style.height = "";   // flyout: để CSS lo opacity/transform
+      sub.style.height = "";   // flyout: let CSS handle opacity/transform
     } else {
       sub.style.height = "0px";
       sub.style.top = "";
@@ -63,9 +63,10 @@
     leftMenu.querySelectorAll("li.has-sub").forEach(closeSub);
   }
 
-  // Đổi trạng thái sidebar mà submenu KHÔNG chạy transition (tránh để lại
-  // ảnh mờ ghost khi mở/thu gọn lúc submenu đang mở). Tắt anim → đổi class →
-  // đóng submenu → ép reflow → bật lại anim ở frame kế tiếp.
+  // Change sidebar state without running submenu transitions (avoids a leftover
+  // ghost image when collapsing/expanding while a submenu is open). Disable
+  // anim -> apply class changes -> close submenus -> force reflow -> re-enable
+  // anim on the next frame.
   function switchSidebar(applyClassChanges) {
     leftMenu.classList.add("no-anim");
     applyClassChanges();
@@ -80,21 +81,21 @@
     if (!sub) return;
     li.classList.add("rotate");
     if (isCollapsed()) {
-      // Flyout: đặt vị trí tức thì (không transition), hiện bằng fade + slide
+      // Flyout: position instantly (no transition), reveal via fade + slide
       sub.style.height = "";
       var rect = li.getBoundingClientRect();
       var top = Math.min(rect.top, window.innerHeight - sub.scrollHeight - 8);
       sub.style.top = Math.max(top, 8) + "px";
       sub.classList.add("open");
     } else {
-      // Accordion: co giãn height
+      // Accordion: animate height
       sub.style.top = "";
       sub.classList.add("open");
       sub.style.height = sub.scrollHeight + "px";
     }
   }
 
-  // Click = accordion (chỉ khi mở rộng; thu gọn dùng hover)
+  // Click = accordion (only when expanded; collapsed uses hover)
   if (leftMenu) leftMenu.querySelectorAll("li.has-sub > a").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
@@ -106,7 +107,7 @@
     });
   });
 
-  // Hover flyout khi thu gọn
+  // Hover flyout while collapsed
   if (leftMenu) leftMenu.querySelectorAll("li.has-sub").forEach(function (li) {
     li.addEventListener("mouseenter", function () {
       if (!isCollapsed()) return;
@@ -119,7 +120,7 @@
     });
   });
 
-  /* ---- Tooltip nhãn khi thu gọn (chỉ item KHÔNG có submenu) ---------- */
+  /* ---- Tooltip label while collapsed (items WITHOUT a submenu) ------- */
   if (showLabel && leftMenu) {
     leftMenu.querySelectorAll(":scope > ul > li > a").forEach(function (a) {
       a.addEventListener("mouseenter", function () {
@@ -142,7 +143,7 @@
     });
   }
 
-  /* ---- Tự điều chỉnh khi resize -------------------------------------- */
+  /* ---- Adjust automatically on resize -------------------------------- */
   function onResize() {
     if (!leftMenu) return;
     switchSidebar(function () {

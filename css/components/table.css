@@ -1,5 +1,5 @@
 /* ==========================================================================
-   table.css — Bảng dữ liệu
+   table.css — Data table
    ========================================================================== */
 
 .table {
@@ -32,7 +32,7 @@
 .table-bordered th,
 .table-bordered td { border: var(--border-width) solid var(--border-color); }
 
-/* Bảng cuộn ngang trên mobile — bọc bảng trong .table-responsive */
+/* Horizontal scroll on mobile — wrap the table in .table-responsive */
 .table-responsive {
   width: 100%;
   overflow-x: auto;

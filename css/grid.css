@@ -1,7 +1,7 @@
 /* ==========================================================================
-   grid.css — Container + hệ lưới 12 cột (flexbox, mobile-first)
+   grid.css — Container + 12-column grid (flexbox, mobile-first)
    Breakpoints: sm 576 · md 768 · lg 992 · xl 1200
-   Tương thích cú pháp Bootstrap: .row .col-6 .col-md-4 ...
+   Bootstrap-compatible syntax: .row .col-6 .col-md-4 ...
    ========================================================================== */
 
 .container,
@@ -11,7 +11,7 @@
   padding-inline: var(--space-4);
 }
 
-/* Container có max-width theo breakpoint (fluid thì luôn 100%) */
+/* Container max-width per breakpoint (fluid stays 100%) */
 @media (min-width: 576px)  { .container { max-width: 540px; } }
 @media (min-width: 768px)  { .container { max-width: 720px; } }
 @media (min-width: 992px)  { .container { max-width: 960px; } }
@@ -31,12 +31,12 @@
   width: 100%;
 }
 
-/* Gutter tiện ích */
+/* Gutter helpers */
 .row.g-0 { margin-inline: 0; }
 .row.g-0 > [class*="col-"],
 .row.g-0 > .col { padding-inline: 0; }
 
-/* ---- Cột co giãn / auto ---------------------------------------------- */
+/* ---- Flexible / auto columns ---------------------------------------------- */
 .col {
   flex: 1 0 0%;
 }
@@ -45,7 +45,7 @@
   width: auto;
 }
 
-/* ---- Base 12 cột (mọi kích thước) ------------------------------------ */
+/* ---- Base 12 columns (all sizes) ------------------------------------ */
 .col-1  { flex: 0 0 auto; width: 8.3333%; }
 .col-2  { flex: 0 0 auto; width: 16.6667%; }
 .col-3  { flex: 0 0 auto; width: 25%; }
@@ -59,7 +59,7 @@
 .col-11 { flex: 0 0 auto; width: 91.6667%; }
 .col-12 { flex: 0 0 auto; width: 100%; }
 
-/* ---- ≥576px (sm) ----------------------------------------------------- */
+/* ---- >=576px (sm) ----------------------------------------------------- */
 @media (min-width: 576px) {
   .col-sm      { flex: 1 0 0%; width: auto; }
   .col-sm-auto { flex: 0 0 auto; width: auto; }
@@ -77,7 +77,7 @@
   .col-sm-12 { flex: 0 0 auto; width: 100%; }
 }
 
-/* ---- ≥768px (md) ----------------------------------------------------- */
+/* ---- >=768px (md) ----------------------------------------------------- */
 @media (min-width: 768px) {
   .col-md      { flex: 1 0 0%; width: auto; }
   .col-md-auto { flex: 0 0 auto; width: auto; }
@@ -95,7 +95,7 @@
   .col-md-12 { flex: 0 0 auto; width: 100%; }
 }
 
-/* ---- ≥992px (lg) ----------------------------------------------------- */
+/* ---- >=992px (lg) ----------------------------------------------------- */
 @media (min-width: 992px) {
   .col-lg      { flex: 1 0 0%; width: auto; }
   .col-lg-auto { flex: 0 0 auto; width: auto; }
@@ -113,7 +113,7 @@
   .col-lg-12 { flex: 0 0 auto; width: 100%; }
 }
 
-/* ---- ≥1200px (xl) ---------------------------------------------------- */
+/* ---- >=1200px (xl) ---------------------------------------------------- */
 @media (min-width: 1200px) {
   .col-xl      { flex: 1 0 0%; width: auto; }
   .col-xl-auto { flex: 0 0 auto; width: auto; }
@@ -131,8 +131,8 @@
   .col-xl-12 { flex: 0 0 auto; width: 100%; }
 }
 
-/* ---- Auto-grid: chia cột tự động không cần khai báo số cột ----------- */
-/* .grid-auto: các item tự dàn, tối thiểu 240px rồi mới xuống hàng.      */
+/* ---- Auto-grid: columns auto-fit, no need to declare a count ----------- */
+/* .grid-auto: items auto-flow, min 240px before wrapping.      */
 .grid-auto {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
