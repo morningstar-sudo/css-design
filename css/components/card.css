@@ -1,0 +1,40 @@
+/* ==========================================================================
+   card.css — Thẻ nội dung
+   ========================================================================== */
+
+.card {
+  background-color: var(--bg-surface);
+  border: var(--border-width) solid var(--border-color);
+  border-radius: var(--radius);
+  margin-bottom: var(--content-gap);
+  font-weight: var(--fw-light);
+  overflow: hidden;
+}
+
+/* Tiêu đề card (giữ cả .title như pen gốc và .card-header chuẩn) */
+.card > .title,
+.card-header {
+  padding: 15px 20px;
+  border-bottom: var(--border-width) solid var(--border-color);
+  color: var(--text-heading);
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-medium);
+}
+
+.card > .content,
+.card-body {
+  padding: var(--space-4) var(--space-5);
+}
+
+.card-footer {
+  padding: var(--space-3) var(--space-5);
+  border-top: var(--border-width) solid var(--border-color);
+  background: var(--bg-muted);
+}
+
+/* Card có ảnh trên đầu */
+.card-img-top { width: 100%; object-fit: cover; }
+
+/* Card nhấn nhẹ khi hover (tuỳ chọn) */
+.card-hover { transition: var(--transition); }
+.card-hover:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
