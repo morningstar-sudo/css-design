@@ -214,6 +214,13 @@
   transform: translateX(0);
 }
 
+/* Khi đang đổi trạng thái sidebar: tắt mọi transition của submenu để không
+   để lại "ảnh mờ" ghost trong lúc chuyển giữa thu gọn ↔ mở rộng */
+#left-menu.no-anim li.has-sub > ul,
+#left-menu.no-anim.small-left-menu li.has-sub > ul {
+  transition: none !important;
+}
+
 /* Tooltip nhãn khi hover lúc thu gọn */
 #show-lable {
   position: fixed;
