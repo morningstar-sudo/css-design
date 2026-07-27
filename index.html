@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S!mple — CSS Design Standard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/simple.css">
+</head>
+<body>
+
+  <!-- ===== Logo ===== -->
+  <div id="logo">
+    <span class="big-logo">.S!mple</span>
+    <span class="small-logo">S!</span>
+  </div>
+
+  <!-- ===== Sidebar ===== -->
+  <div id="left-menu">
+    <ul>
+      <li class="active"><a href="#">
+        <span class="icon">◧</span><span>Dashboard</span>
+      </a></li>
+      <li class="has-sub">
+        <a href="#"><span class="icon">▤</span><span>UI Elements</span></a>
+        <ul>
+          <li><a href="#">Buttons</a></li>
+          <li><a href="#">Forms</a></li>
+          <li><a href="#">Cards</a></li>
+        </ul>
+      </li>
+      <li><a href="#"><span class="icon">◱</span><span>Users</span></a></li>
+      <li><a href="#"><span class="icon">▦</span><span>Tables</span></a></li>
+      <li><a href="#"><span class="icon">◨</span><span>Grid system</span></a></li>
+      <li class="has-sub">
+        <a href="#"><span class="icon">▧</span><span>Report</span></a>
+        <ul>
+          <li><a href="#">Report Item 1</a></li>
+          <li><a href="#">Report Item 2</a></li>
+          <li><a href="#">Report Item 3</a></li>
+        </ul>
+      </li>
+      <li><a href="#"><span class="icon">⚙</span><span>Setting</span></a></li>
+    </ul>
+  </div>
+
+  <!-- ===== Main ===== -->
+  <div id="main-content">
+    <div id="header">
+      <div class="header-left float-left">
+        <span id="toggle-left-menu" title="Thu gọn / mở menu">☰</span>
+      </div>
+      <div class="header-right float-right d-flex align-center gap-3">
+        <button class="btn btn-ghost btn-icon" id="theme-toggle" title="Đổi sáng/tối">◑</button>
+        <span class="avatar avatar-sm">HN</span>
+      </div>
+    </div>
+
+    <div id="page-container">
+
+      <!-- Breadcrumb -->
+      <ul class="breadcrumb">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">UI Kit</a></li>
+        <li class="active">Showcase</li>
+      </ul>
+
+      <!-- Buttons -->
+      <div class="card">
+        <div class="title">Buttons</div>
+        <div class="content">
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-info">Info</button>
+          <button class="btn btn-success">Success</button>
+          <button class="btn btn-warning">Warning</button>
+          <button class="btn btn-danger">Danger</button>
+          <button class="btn btn-primary btn-outline">Outline</button>
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary btn-lg">Large</button>
+          <button class="btn btn-primary" disabled>Disabled</button>
+        </div>
+      </div>
+
+      <!-- Forms -->
+      <div class="card">
+        <div class="title">Form controls</div>
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input type="text" class="form-control" placeholder="Nhập tên...">
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Languages</label>
+                  <select class="form-select">
+                    <option>HTML</option><option>CSS</option><option>JS</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Checkbox</label><br>
+                  <input id="html" type="checkbox" class="magic-checkbox" checked><label for="html">HTML</label>
+                  <input id="css" type="checkbox" class="magic-checkbox"><label for="css">CSS</label>
+                  <input id="js" type="checkbox" class="magic-checkbox"><label for="js">JS</label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Radio</label><br>
+                  <input name="job" id="d1" type="radio" class="magic-radio" checked><label for="d1">Designer</label>
+                  <input name="job" id="d2" type="radio" class="magic-radio"><label for="d2">Developer</label>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Switch</label><br>
+                  <input id="sw1" type="checkbox" class="switch" checked><label for="sw1">Bật thông báo</label>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label>Input group</label>
+                  <div class="input-group">
+                    <span class="input-group-text">@</span>
+                    <input type="text" class="form-control" placeholder="username">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Form ngang -->
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Email</label>
+              <div class="col-sm-9">
+                <input type="text" readonly class="form-control-plaintext" value="email@example.com">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label">Password</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" placeholder="Password">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid responsive demo -->
+      <div class="card">
+        <div class="title">Grid tự responsive</div>
+        <div class="content">
+          <div class="row">
+            <div class="col-12 col-md-6 col-lg-3"><div class="p-3 bg-muted rounded text-center">col-lg-3</div></div>
+            <div class="col-12 col-md-6 col-lg-3"><div class="p-3 bg-muted rounded text-center">col-lg-3</div></div>
+            <div class="col-12 col-md-6 col-lg-3"><div class="p-3 bg-muted rounded text-center">col-lg-3</div></div>
+            <div class="col-12 col-md-6 col-lg-3"><div class="p-3 bg-muted rounded text-center">col-lg-3</div></div>
+          </div>
+          <p class="text-muted mt-3">Auto-grid (không cần khai báo số cột):</p>
+          <div class="grid-auto">
+            <div class="p-3 bg-muted rounded text-center">Auto</div>
+            <div class="p-3 bg-muted rounded text-center">Auto</div>
+            <div class="p-3 bg-muted rounded text-center">Auto</div>
+            <div class="p-3 bg-muted rounded text-center">Auto</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alerts + badges -->
+      <div class="card">
+        <div class="title">Alerts & Badges</div>
+        <div class="content">
+          <div class="alert alert-info alert-dismissible">Thông tin. <span class="close">&times;</span></div>
+          <div class="alert alert-success">Thành công!</div>
+          <div class="alert alert-warning">Cảnh báo.</div>
+          <div class="alert alert-danger">Lỗi xảy ra.</div>
+          <p>
+            <span class="badge badge-primary">Primary</span>
+            <span class="badge badge-success">Success</span>
+            <span class="badge badge-danger">3</span>
+            <span class="badge badge-soft">Soft</span>
+            <span class="badge badge-pill badge-info">Pill</span>
+            <span class="status-dot online"></span> Online
+          </p>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="card">
+        <div class="title">Table</div>
+        <div class="content">
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead><tr><th>#</th><th>Name</th><th>Role</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>An</td><td>Designer</td><td><span class="badge badge-success">Active</span></td></tr>
+                <tr><td>2</td><td>Bình</td><td>Developer</td><td><span class="badge badge-danger">Off</span></td></tr>
+                <tr><td>3</td><td>Cường</td><td>Frontend</td><td><span class="badge badge-success">Active</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs + dropdown + modal + progress -->
+      <div class="row">
+        <div class="col-12 col-lg-6">
+          <div class="card">
+            <div class="title">Tabs</div>
+            <div class="content">
+              <nav class="tabs">
+                <a href="#tab1" class="active">Tab 1</a>
+                <a href="#tab2">Tab 2</a>
+                <a href="#tab3">Tab 3</a>
+              </nav>
+              <div class="tab-content">
+                <div id="tab1" class="tab-pane active">Nội dung tab 1.</div>
+                <div id="tab2" class="tab-pane">Nội dung tab 2.</div>
+                <div id="tab3" class="tab-pane">Nội dung tab 3.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-6">
+          <div class="card">
+            <div class="title">Dropdown, Modal, Progress</div>
+            <div class="content">
+              <div class="dropdown">
+                <button class="btn btn-secondary" data-toggle="dropdown">Menu ▾</button>
+                <div class="dropdown-menu">
+                  <a href="#">Hành động 1</a>
+                  <a href="#">Hành động 2</a>
+                  <div class="dropdown-divider"></div>
+                  <a href="#">Đăng xuất</a>
+                </div>
+              </div>
+              <button class="btn btn-primary" data-modal-target="#demoModal">Mở modal</button>
+              <div class="progress mt-3"><div class="progress-bar" style="width:70%"></div></div>
+              <div class="progress mt-2"><div class="progress-bar success" style="width:45%"></div></div>
+              <p class="mt-3"><span class="spinner"></span> Đang tải...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination + list-group -->
+      <div class="card">
+        <div class="title">Pagination & List group</div>
+        <div class="content">
+          <div class="pagination mb-4">
+            <a href="#" class="disabled">‹</a>
+            <a href="#" class="active">1</a>
+            <a href="#">2</a>
+            <a href="#">3</a>
+            <a href="#">›</a>
+          </div>
+          <div class="list-group">
+            <div class="list-group-item action"><span class="avatar avatar-sm">A</span> An <span class="badge badge-soft ml-auto">Admin</span></div>
+            <div class="list-group-item action"><span class="avatar avatar-sm">B</span> Bình <span class="chip ml-auto">Member</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Tooltip nhãn + overlay drawer + modal -->
+  <span id="show-lable"></span>
+  <div id="sidebar-overlay"></div>
+
+  <div class="modal-backdrop" id="demoModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h5 class="modal-title">Xác nhận</h5>
+        <span class="modal-close" data-modal-close>&times;</span>
+      </div>
+      <div class="modal-body">Bạn có chắc muốn tiếp tục thao tác này không?</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-outline" data-modal-close>Huỷ</button>
+        <button class="btn btn-primary" data-modal-close>Đồng ý</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dashboard.js"></script>
+  <script>
+    // Theme toggle demo
+    document.getElementById('theme-toggle').addEventListener('click', function () {
+      var html = document.documentElement;
+      html.setAttribute('data-theme', html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>

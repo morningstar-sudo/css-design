@@ -1,0 +1,256 @@
+/* ==========================================================================
+   dashboard.css — Bố cục admin: logo, sidebar, header, vùng nội dung
+   Responsive:
+     ≥992px : sidebar đầy đủ, thu gọn được (.small-left-menu)
+     <992px : sidebar thành DRAWER trượt + overlay (mở bằng nút menu)
+   ========================================================================== */
+
+/* ---- Logo ------------------------------------------------------------ */
+#logo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-logo);
+  height: var(--header-height);
+  width: var(--sidebar-width);
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  background-color: var(--bg-logo);
+  border-right: var(--border-width) solid var(--border-color);
+  color: #fff;
+  font-size: 26px;
+  overflow: hidden;
+  transition: var(--transition);
+}
+#logo .big-logo   { display: inline; }
+#logo .small-logo { display: none; }
+
+/* ---- Sidebar --------------------------------------------------------- */
+#left-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-sidebar);
+  width: var(--sidebar-width);
+  height: 100vh;
+  margin-top: var(--header-height);
+  padding-bottom: var(--header-height);
+  background-color: var(--bg-sidebar);
+  border-right: var(--border-width) solid var(--border-color);
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: var(--transition);
+}
+
+#left-menu ul { padding: 0; margin: 0; }
+
+#left-menu ul li {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+}
+#left-menu > ul > li { margin: 12px 0; }
+
+#left-menu ul li a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 37px;
+  color: var(--text-sidebar);
+}
+
+#left-menu ul li a i,
+#left-menu ul li a .icon {
+  flex: 0 0 35px;
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: var(--transition-fast);
+}
+
+#left-menu ul li a span {
+  padding-left: 10px;
+  color: var(--text-sidebar);
+  font-weight: var(--fw-light);
+  white-space: nowrap;
+  transition: var(--transition-fast);
+}
+
+#left-menu ul li:hover > a span,
+#left-menu ul li:hover > a i { color: var(--text-sidebar-hover); }
+
+/* Item active */
+#left-menu ul li.active > a { border-bottom: 2px solid var(--color-primary); }
+#left-menu ul li.active > a span { color: var(--text-sidebar-active); }
+#left-menu ul li.active > a i,
+#left-menu ul li.active > a .icon {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: var(--radius);
+}
+
+/* ---- Submenu (accordion) --------------------------------------------- */
+#left-menu li.has-sub > ul {
+  background-color: var(--bg-sidebar-sub);
+  margin: 0 -10px;
+  padding-left: 45px;
+  height: 0;
+  overflow: hidden;
+  transition: var(--transition);
+}
+#left-menu li.has-sub > ul > li { padding-top: 10px; }
+#left-menu li.has-sub > ul > li:last-child { padding-bottom: 10px; }
+#left-menu li.has-sub > ul a { height: auto; color: var(--text-sidebar); }
+#left-menu li.has-sub > ul a:hover { color: var(--text-sidebar-hover); }
+
+/* Mũi tên xoay */
+@media (min-width: 992px) {
+  #left-menu li.has-sub::after {
+    content: "";
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 7px;
+    height: 7px;
+    border-right: 2px solid var(--text-sidebar);
+    border-bottom: 2px solid var(--text-sidebar);
+    transform: rotate(-45deg);
+    transition: var(--transition-fast);
+    pointer-events: none;
+  }
+  #left-menu li.has-sub.rotate::after { transform: rotate(45deg); }
+}
+
+/* ---- Header ---------------------------------------------------------- */
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: var(--z-header);
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-surface);
+  border-bottom: var(--border-width) solid var(--border-color);
+}
+#header .header-left {
+  padding-left: calc(var(--sidebar-width) + 20px);
+  transition: var(--transition);
+}
+#header .header-right { padding-right: var(--space-5); }
+#header .header-left i,
+#header .header-right i,
+#header .header-left .icon,
+#header .header-right .icon {
+  font-size: 26px;
+  padding: 0 5px;
+  cursor: pointer;
+  color: var(--text-body);
+}
+
+/* ---- Vùng nội dung --------------------------------------------------- */
+#main-content { min-height: calc(100vh - var(--header-height)); }
+
+#page-container {
+  padding-left: calc(var(--sidebar-width) + 20px);
+  padding-top: calc(var(--header-height) + 20px);
+  padding-right: var(--space-5);
+  padding-bottom: var(--space-5);
+  transition: var(--transition);
+}
+
+/* ==========================================================================
+   TRẠNG THÁI THU GỌN (≥992px) — .small-left-menu
+   ========================================================================== */
+#left-menu.small-left-menu,
+#logo.small-left-menu { width: var(--sidebar-width-collapsed); }
+
+#logo.small-left-menu .big-logo   { display: none; }
+#logo.small-left-menu .small-logo { display: inline; }
+#logo.small-left-menu { padding-left: 0; justify-content: center; font-size: 18px; }
+
+#left-menu.small-left-menu ul li a span { opacity: 0; visibility: hidden; }
+#left-menu.small-left-menu li.has-sub::after { content: none; }
+
+#page-container.small-left-menu,
+#header .header-left.small-left-menu {
+  padding-left: calc(var(--sidebar-width-collapsed) + 20px);
+}
+
+/* Popup submenu khi thu gọn */
+#left-menu.small-left-menu li.has-sub > ul {
+  position: fixed;
+  left: calc(var(--sidebar-width-collapsed) + 9px);
+  width: var(--sidebar-width);
+  z-index: var(--z-drawer);
+  padding-left: 15px;
+}
+
+/* Tooltip nhãn khi hover lúc thu gọn */
+#show-lable {
+  position: fixed;
+  z-index: var(--z-tooltip);
+  padding: 6px 15px;
+  background-color: var(--color-primary);
+  color: #fff;
+  font-weight: var(--fw-light);
+  border-radius: var(--radius);
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition-fast);
+  pointer-events: none;
+}
+
+/* Overlay cho drawer mobile */
+#sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease;
+}
+
+/* ==========================================================================
+   RESPONSIVE < 992px — sidebar thành drawer trượt
+   ========================================================================== */
+@media (max-width: 991.98px) {
+  #logo { width: var(--sidebar-width); }
+
+  /* Sidebar ẩn sang trái, mở bằng class .open */
+  #left-menu {
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-lg);
+  }
+  #left-menu.open { transform: translateX(0); }
+  #left-menu.open ~ #sidebar-overlay,
+  #sidebar-overlay.open { opacity: 1; visibility: visible; }
+
+  /* Nội dung chiếm toàn bộ chiều ngang */
+  #page-container,
+  #header .header-left {
+    padding-left: var(--space-5);
+  }
+  #header .header-left { padding-left: var(--space-4); }
+
+  /* Submenu accordion bình thường (không popup) */
+  #left-menu li.has-sub > ul { position: static; width: auto; }
+
+  /* Bỏ thu gọn kiểu desktop trên mobile */
+  #left-menu.small-left-menu { width: var(--sidebar-width); }
+  #left-menu.small-left-menu ul li a span { opacity: 1; visibility: visible; }
+}
+
+/* Màn rất nhỏ: giảm padding nội dung */
+@media (max-width: 575.98px) {
+  #page-container { padding-inline: var(--space-3); }
+  .card > .content, .card-body { padding: var(--space-3); }
+}
