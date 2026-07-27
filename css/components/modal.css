@@ -1,6 +1,6 @@
 /* ==========================================================================
-   modal.css — Hộp thoại / modal
-   Mở bằng cách thêm class .open vào .modal-backdrop
+   modal.css — Dialog / modal
+   Open by adding the .open class to .modal-backdrop
    ========================================================================== */
 
 .modal-backdrop {
@@ -64,5 +64,5 @@
   border-top: var(--border-width) solid var(--border-color);
 }
 
-/* Khoá cuộn nền khi mở modal (thêm class vào <body> bằng JS) */
+/* Lock background scroll when a modal is open (add class to <body> via JS) */
 body.modal-open { overflow: hidden; }

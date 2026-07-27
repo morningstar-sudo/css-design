@@ -1,5 +1,5 @@
 /* ==========================================================================
-   alert.css — Thông báo (alert) + nhãn (badge)
+   alert.css — Alerts + badges
    ========================================================================== */
 
 .alert {
@@ -54,13 +54,13 @@
 .badge-warning { background: var(--color-warning); color: var(--on-warning); }
 .badge-danger  { background: var(--color-danger); }
 
-/* Badge viền (soft) */
+/* Soft badge */
 .badge-soft {
   background: color-mix(in srgb, var(--color-primary) 14%, transparent);
   color: var(--color-primary);
 }
 
-/* Chấm chấm trạng thái */
+/* Status dot */
 .status-dot {
   display: inline-block;
   width: 8px;

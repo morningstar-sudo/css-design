@@ -1,5 +1,5 @@
 /* ==========================================================================
-   buttons.css — Nút bấm (.btn + biến thể)
+   buttons.css — Buttons (.btn + variants)
    ========================================================================== */
 
 .btn {
@@ -67,7 +67,7 @@
 .btn-block { display: flex; width: 100%; }
 .btn-icon { padding: 0.5rem; aspect-ratio: 1; }
 
-/* Nhóm nút */
+/* Button group */
 .btn-group { display: inline-flex; }
 .btn-group .btn { border-radius: 0; }
 .btn-group .btn:first-child { border-start-start-radius: var(--radius); border-end-start-radius: var(--radius); }

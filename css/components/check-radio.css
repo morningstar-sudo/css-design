@@ -1,7 +1,7 @@
 /* ==========================================================================
-   check-radio.css — Checkbox / radio / switch tuỳ biến (pure CSS)
-   Thay thư viện magic-checkbox / magic-radio của pen gốc.
-   Cách dùng:  <input class="magic-checkbox" id="x"><label for="x">...</label>
+   check-radio.css — Custom checkbox / radio / switch (pure CSS)
+   Replaces the magic-checkbox / magic-radio library from the original pen.
+   Usage:  <input class="magic-checkbox" id="x"><label for="x">...</label>
    ========================================================================== */
 
 .magic-checkbox,
@@ -41,7 +41,7 @@
 .magic-checkbox + label::before { border-radius: var(--radius); }
 .magic-radio + label::before    { border-radius: 50%; }
 
-/* Dấu tick / chấm (ẩn ban đầu) */
+/* Tick / dot (hidden initially) */
 .magic-checkbox + label::after,
 .magic-radio + label::after {
   content: "";

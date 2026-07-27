@@ -2,7 +2,7 @@
    nav.css — Navbar, breadcrumb, pagination, tabs, dropdown
    ========================================================================== */
 
-/* ---- Navbar (thanh điều hướng ngang, dùng ngoài dashboard) ----------- */
+/* ---- Navbar (horizontal nav bar, for use outside the dashboard) ----------- */
 .navbar {
   display: flex;
   align-items: center;

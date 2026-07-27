@@ -1,6 +1,6 @@
 /* ==========================================================================
-   tokens.css — Design tokens (biến gốc dùng chung)
-   Sửa brand / theme / spacing ở ĐÂY là toàn bộ hệ thống đổi theo.
+   tokens.css — Design tokens (shared root variables)
+   Edit brand / theme / spacing HERE and the whole system follows.
    ========================================================================== */
 
 :root {
@@ -18,7 +18,7 @@
   --color-danger:         #dc3545;
   --color-danger-hover:   #c12b3a;
 
-  /* On-color text (chữ nằm trên nền màu) */
+  /* On-color text (text on a colored background) */
   --on-primary:   #ffffff;
   --on-secondary: #ffffff;
   --on-info:      #ffffff;
@@ -49,7 +49,7 @@
   --border-input:       #d8e0e5;
   --border-width:       1px;
 
-  /* ---- Radius & shadow (phẳng, đúng phong cách gốc) ------------------ */
+  /* ---- Radius & shadow (flat, matching the original style) ------------------ */
   --radius-sm: 2px;
   --radius:    2px;
   --radius-lg: 4px;
@@ -69,7 +69,7 @@
   --fw-medium:  500;
   --fw-bold:    700;
 
-  /* Fluid font sizes (tự co giãn theo màn) */
+  /* Fluid font sizes (scale with the viewport) */
   --fs-xs:   0.75rem;                              /* 12px */
   --fs-sm:   0.8125rem;                            /* 13px */
   --fs-base: 0.9375rem;                            /* 15px */
@@ -119,7 +119,7 @@
 }
 
 /* ==========================================================================
-   Dark theme — bật bằng <html data-theme="dark"> hoặc theo hệ điều hành
+   Dark theme — enable via <html data-theme="dark"> or follow the OS
    ========================================================================== */
 :root[data-theme="dark"] {
   --bg-body:      #1a1d24;
