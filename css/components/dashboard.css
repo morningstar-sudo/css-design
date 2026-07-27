@@ -148,12 +148,15 @@
 #header .header-left i,
 #header .header-right i,
 #header .header-left .icon,
-#header .header-right .icon {
+#header .header-right .icon,
+#toggle-left-menu {
   font-size: 26px;
   padding: 0 5px;
   cursor: pointer;
   color: var(--text-body);
+  user-select: none;
 }
+#toggle-left-menu:hover { color: var(--color-primary); }
 
 /* ---- Vùng nội dung --------------------------------------------------- */
 #main-content { min-height: calc(100vh - var(--header-height)); }
@@ -184,14 +187,18 @@
   padding-left: calc(var(--sidebar-width-collapsed) + 20px);
 }
 
-/* Popup submenu khi thu gọn */
+/* Popup submenu (flyout) khi thu gọn — top do JS neo theo item */
 #left-menu.small-left-menu li.has-sub > ul {
   position: fixed;
   left: calc(var(--sidebar-width-collapsed) + 9px);
-  width: var(--sidebar-width);
-  z-index: var(--z-drawer);
+  width: 220px;
+  margin: 0;
   padding-left: 15px;
+  z-index: var(--z-drawer);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
 }
+#left-menu.small-left-menu li.has-sub > ul.open { padding-block: 8px; }
 
 /* Tooltip nhãn khi hover lúc thu gọn */
 #show-lable {
@@ -223,10 +230,36 @@
    RESPONSIVE < 992px — sidebar thành drawer trượt
    ========================================================================== */
 @media (max-width: 991.98px) {
-  #logo { width: var(--sidebar-width); }
+  /* Hamburger ☰ nằm góc trái, luôn thấy & bấm được */
+  #header .header-left { padding-left: 0; }
+  #toggle-left-menu {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: var(--header-height);
+    padding: 0;
+    color: var(--text-body);
+  }
 
-  /* Sidebar ẩn sang trái, mở bằng class .open */
+  /* Logo dịch sang phải hamburger, hoà vào header trắng (không che nút ☰) */
+  #logo {
+    left: 52px;
+    width: auto;
+    padding-left: 4px;
+    padding-right: 12px;
+    background: transparent;
+    border-right: 0;
+    color: var(--text-heading);
+    font-size: 22px;
+    z-index: var(--z-logo);
+  }
+  #logo .big-logo { display: inline; }
+  #logo .small-logo { display: none; }
+
+  /* Sidebar ẩn sang trái, mở bằng class .open — nổi trên overlay để bấm được */
   #left-menu {
+    z-index: var(--z-drawer);
     transform: translateX(-100%);
     box-shadow: var(--shadow-lg);
   }
@@ -235,11 +268,7 @@
   #sidebar-overlay.open { opacity: 1; visibility: visible; }
 
   /* Nội dung chiếm toàn bộ chiều ngang */
-  #page-container,
-  #header .header-left {
-    padding-left: var(--space-5);
-  }
-  #header .header-left { padding-left: var(--space-4); }
+  #page-container { padding-left: var(--space-5); }
 
   /* Submenu accordion bình thường (không popup) */
   #left-menu li.has-sub > ul { position: static; width: auto; }

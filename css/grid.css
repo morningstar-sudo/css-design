@@ -25,14 +25,16 @@
   margin-inline: calc(var(--grid-gutter) / -2);
 }
 
-.row > [class*="col"] {
+.row > [class*="col-"],
+.row > .col {
   padding-inline: calc(var(--grid-gutter) / 2);
   width: 100%;
 }
 
 /* Gutter tiện ích */
 .row.g-0 { margin-inline: 0; }
-.row.g-0 > [class*="col"] { padding-inline: 0; }
+.row.g-0 > [class*="col-"],
+.row.g-0 > .col { padding-inline: 0; }
 
 /* ---- Cột co giãn / auto ---------------------------------------------- */
 .col {
