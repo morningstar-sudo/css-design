@@ -25,10 +25,11 @@
       leftMenu.classList.toggle("open");
       if (overlay) overlay.classList.toggle("open");
     } else {
-      [leftMenu, logo, pageCont, headerLeft].forEach(function (el) {
-        if (el) el.classList.toggle("small-left-menu");
+      switchSidebar(function () {
+        [leftMenu, logo, pageCont, headerLeft].forEach(function (el) {
+          if (el) el.classList.toggle("small-left-menu");
+        });
       });
-      closeAllSubs();
     }
   }
   if (toggleBtn) toggleBtn.addEventListener("click", toggleSidebar);
@@ -60,6 +61,18 @@
   function closeAllSubs() {
     if (!leftMenu) return;
     leftMenu.querySelectorAll("li.has-sub").forEach(closeSub);
+  }
+
+  // Đổi trạng thái sidebar mà submenu KHÔNG chạy transition (tránh để lại
+  // ảnh mờ ghost khi mở/thu gọn lúc submenu đang mở). Tắt anim → đổi class →
+  // đóng submenu → ép reflow → bật lại anim ở frame kế tiếp.
+  function switchSidebar(applyClassChanges) {
+    leftMenu.classList.add("no-anim");
+    applyClassChanges();
+    closeAllSubs();
+    if (showLabel) { showLabel.style.opacity = "0"; showLabel.style.visibility = "hidden"; }
+    void leftMenu.offsetHeight;
+    requestAnimationFrame(function () { leftMenu.classList.remove("no-anim"); });
   }
 
   function openSub(li) {
@@ -132,16 +145,16 @@
   /* ---- Tự điều chỉnh khi resize -------------------------------------- */
   function onResize() {
     if (!leftMenu) return;
-    if (isMobile()) {
-      leftMenu.classList.remove("small-left-menu");
-      if (logo) logo.classList.remove("small-left-menu");
-      if (pageCont) pageCont.classList.remove("small-left-menu");
-      if (headerLeft) headerLeft.classList.remove("small-left-menu");
-    } else {
-      leftMenu.classList.remove("open");
-      if (overlay) overlay.classList.remove("open");
-    }
-    closeAllSubs();
+    switchSidebar(function () {
+      if (isMobile()) {
+        [leftMenu, logo, pageCont, headerLeft].forEach(function (el) {
+          if (el) el.classList.remove("small-left-menu");
+        });
+      } else {
+        leftMenu.classList.remove("open");
+        if (overlay) overlay.classList.remove("open");
+      }
+    });
   }
   window.addEventListener("resize", onResize);
   onResize();
