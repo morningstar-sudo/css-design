@@ -148,12 +148,15 @@
 #header .header-left i,
 #header .header-right i,
 #header .header-left .icon,
-#header .header-right .icon {
+#header .header-right .icon,
+#toggle-left-menu {
   font-size: 26px;
   padding: 0 5px;
   cursor: pointer;
   color: var(--text-body);
+  user-select: none;
 }
+#toggle-left-menu:hover { color: var(--color-primary); }
 
 /* ---- Vùng nội dung --------------------------------------------------- */
 #main-content { min-height: calc(100vh - var(--header-height)); }
@@ -184,14 +187,18 @@
   padding-left: calc(var(--sidebar-width-collapsed) + 20px);
 }
 
-/* Popup submenu khi thu gọn */
+/* Popup submenu (flyout) khi thu gọn — top do JS neo theo item */
 #left-menu.small-left-menu li.has-sub > ul {
   position: fixed;
   left: calc(var(--sidebar-width-collapsed) + 9px);
-  width: var(--sidebar-width);
-  z-index: var(--z-drawer);
+  width: 220px;
+  margin: 0;
   padding-left: 15px;
+  z-index: var(--z-drawer);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
 }
+#left-menu.small-left-menu li.has-sub > ul.open { padding-block: 8px; }
 
 /* Tooltip nhãn khi hover lúc thu gọn */
 #show-lable {

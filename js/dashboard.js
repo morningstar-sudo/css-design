@@ -28,6 +28,7 @@
       [leftMenu, logo, pageCont, headerLeft].forEach(function (el) {
         if (el) el.classList.toggle("small-left-menu");
       });
+      closeAllSubs();
     }
   }
   if (toggleBtn) toggleBtn.addEventListener("click", toggleSidebar);
@@ -36,41 +37,68 @@
     overlay.classList.remove("open");
   });
 
-  /* ---- Submenu accordion --------------------------------------------- */
-  var subLinks = document.querySelectorAll("#left-menu li.has-sub > a");
-  subLinks.forEach(function (link) {
+  /* ---- Submenu: accordion (mở rộng) / flyout hover (thu gọn) --------- */
+  // Đang ở chế độ sidebar thu gọn trên desktop?
+  function isCollapsed() {
+    return leftMenu && leftMenu.classList.contains("small-left-menu") && !isMobile();
+  }
+
+  function closeAllSubs() {
+    if (!leftMenu) return;
+    leftMenu.querySelectorAll("li.has-sub").forEach(function (li) {
+      li.classList.remove("rotate");
+      var s = li.querySelector("ul");
+      if (s) { s.classList.remove("open"); s.style.height = "0px"; s.style.top = ""; }
+    });
+  }
+
+  function openSub(li) {
+    var sub = li.querySelector("ul");
+    if (!sub) return;
+    sub.classList.add("open");
+    li.classList.add("rotate");
+    if (isCollapsed()) {
+      // Flyout: neo top theo item, không cho tràn đáy màn hình
+      var rect = li.getBoundingClientRect();
+      var wanted = sub.scrollHeight;
+      var top = Math.min(rect.top, window.innerHeight - wanted - 8);
+      sub.style.top = Math.max(top, 8) + "px";
+    }
+    sub.style.height = sub.scrollHeight + "px";
+  }
+
+  // Click = accordion (chỉ khi mở rộng; thu gọn dùng hover)
+  if (leftMenu) leftMenu.querySelectorAll("li.has-sub > a").forEach(function (link) {
     link.addEventListener("click", function (e) {
       e.preventDefault();
+      if (isCollapsed()) return;
       var li = link.parentElement;
-      var sub = li.querySelector("ul");
-      var willOpen = !sub.classList.contains("open");
-
-      // Đóng các submenu khác
-      leftMenu.querySelectorAll("li.has-sub").forEach(function (other) {
-        if (other !== li) {
-          other.classList.remove("rotate");
-          var s = other.querySelector("ul");
-          if (s) { s.classList.remove("open"); s.style.height = "0px"; }
-        }
-      });
-
-      if (willOpen) {
-        sub.classList.add("open");
-        li.classList.add("rotate");
-        sub.style.height = sub.scrollHeight + "px";
-      } else {
-        sub.classList.remove("open");
-        li.classList.remove("rotate");
-        sub.style.height = "0px";
-      }
+      var willOpen = !li.querySelector("ul").classList.contains("open");
+      closeAllSubs();
+      if (willOpen) openSub(li);
     });
   });
 
-  /* ---- Tooltip nhãn khi thu gọn (desktop) ---------------------------- */
+  // Hover flyout khi thu gọn
+  if (leftMenu) leftMenu.querySelectorAll("li.has-sub").forEach(function (li) {
+    li.addEventListener("mouseenter", function () {
+      if (!isCollapsed()) return;
+      if (showLabel) { showLabel.style.opacity = "0"; showLabel.style.visibility = "hidden"; }
+      closeAllSubs();
+      openSub(li);
+    });
+    li.addEventListener("mouseleave", function () {
+      if (!isCollapsed()) return;
+      var sub = li.querySelector("ul");
+      if (sub) { sub.classList.remove("open"); li.classList.remove("rotate"); sub.style.height = "0px"; sub.style.top = ""; }
+    });
+  });
+
+  /* ---- Tooltip nhãn khi thu gọn (chỉ item KHÔNG có submenu) ---------- */
   if (showLabel && leftMenu) {
-    leftMenu.querySelectorAll("> ul > li > a").forEach(function (a) {
+    leftMenu.querySelectorAll(":scope > ul > li > a").forEach(function (a) {
       a.addEventListener("mouseenter", function () {
-        if (!leftMenu.classList.contains("small-left-menu") || isMobile()) return;
+        if (!isCollapsed()) return;
         var li = a.parentElement;
         if (li.classList.contains("has-sub")) return;
         var span = a.querySelector("span");
@@ -101,6 +129,7 @@
       leftMenu.classList.remove("open");
       if (overlay) overlay.classList.remove("open");
     }
+    closeAllSubs();
   }
   window.addEventListener("resize", onResize);
   onResize();
